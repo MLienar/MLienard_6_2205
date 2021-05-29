@@ -1,0 +1,20 @@
+html,
+body {
+  box-sizing: border-box;
+}
+
+body {
+  width: clamp(400px, 90vw, 1250px);
+  margin: auto;
+}
+
+.reader-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}

@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: clamp(20px, 5vh, 40px) 0;
+  align-items: center;
+  img {
+    width: clamp(100px, 10vw, 150px);
+    height: auto;
+    margin-right: clamp(40px, 2vw, 60px);
+  }
+  .nav-menu {
+    display: flex;
+    flex-flow: row wrap;
+  }
+}

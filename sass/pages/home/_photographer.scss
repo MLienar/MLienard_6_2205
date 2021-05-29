@@ -1,0 +1,59 @@
+.photographer-container {
+  display: flex;
+  flex: 0 1 33%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5vh;
+  // &:nth-child(n + 1) {
+  //   align-items: flex-start;
+  // }
+  // &:nth-child(n + 2) {
+  //   align-items: center;
+  // }
+  // &:nth-child(n + 3) {
+  //   align-items: flex-end;
+  // }
+  .photographer-thumb {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    &_link {
+      text-decoration: none;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+    }
+    &_portrait {
+      margin: auto;
+      object-fit: cover;
+      border-radius: 50%;
+      height: clamp(150px, 17vh, 250px);
+      width: clamp(150px, 17vh, 250px);
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    &_name {
+      margin-top: 2vh;
+      text-decoration: none;
+      text-align: center;
+    }
+    &_city {
+      color: $color-primary;
+      font-size: clamp(12px, 0.8rem + 0.2vh, 15px);
+      margin-top: clamp(5px, 0.7vh, 15px);
+    }
+    &_quote {
+      font-size: clamp(11px, 0.75rem + 0.2vh, 13px);
+      margin-top: clamp(5px, 0.5vh, 10px);
+    }
+    &_price {
+      font-size: clamp(9px, 0.7rem + 0.1vh, 12px);
+      margin-top: clamp(5px, 0.5vh, 10px);
+      color: #757575;
+    }
+    &_tags {
+      margin-top: clamp(5px, 0.7vh, 15px);
+      display: flex;
+      flex-flow: row nowrap;
+    }
+  }
+}

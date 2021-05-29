@@ -1,0 +1,278 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  color: #901c1c;
+  font-size: clamp(30px, 1rem + 1vh, 40px);
+  font-weight: 400;
+}
+
+h2 {
+  color: #d3573c;
+  font-size: clamp(30px, 1rem + 1vh, 40px);
+  font-weight: 400;
+}
+
+html,
+body {
+  box-sizing: border-box;
+}
+
+body {
+  width: clamp(400px, 90vw, 1250px);
+  margin: auto;
+}
+
+.reader-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.tag {
+  font-weight: 600;
+  color: #901c1c;
+  cursor: pointer;
+  border: 0.5px solid #c4c4c4;
+  width: fit-content;
+  padding: clamp(5px, 0.5vh, 8px) clamp(5px, 0.8vw, 15px);
+  border-radius: 50px;
+  font-size: clamp(12px, 0.7rem + 0.1vh, 14px);
+  margin: clamp(3px, 0.2vw, 6px);
+}
+.tag:hover, .tag:focus {
+  background: #901c1c;
+  color: white;
+  transition: all 0.2s ease-out;
+  border: 0.5px solid rgba(0, 0, 0, 0);
+}
+
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: clamp(20px, 5vh, 40px) 0;
+  align-items: center;
+}
+header img {
+  width: clamp(100px, 10vw, 150px);
+  height: auto;
+  margin-right: clamp(40px, 2vw, 60px);
+}
+header .nav-menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+main {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-end;
+}
+
+main {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+}
+main .photographers-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 5vh;
+}
+
+.photographer-container {
+  display: flex;
+  flex: 0 1 33%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5vh;
+}
+.photographer-container .photographer-thumb {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.photographer-container .photographer-thumb_link {
+  text-decoration: none;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.photographer-container .photographer-thumb_portrait {
+  margin: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  height: clamp(150px, 17vh, 250px);
+  width: clamp(150px, 17vh, 250px);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+}
+.photographer-container .photographer-thumb_name {
+  margin-top: 2vh;
+  text-decoration: none;
+  text-align: center;
+}
+.photographer-container .photographer-thumb_city {
+  color: #901c1c;
+  font-size: clamp(12px, 0.8rem + 0.2vh, 15px);
+  margin-top: clamp(5px, 0.7vh, 15px);
+}
+.photographer-container .photographer-thumb_quote {
+  font-size: clamp(11px, 0.75rem + 0.2vh, 13px);
+  margin-top: clamp(5px, 0.5vh, 10px);
+}
+.photographer-container .photographer-thumb_price {
+  font-size: clamp(9px, 0.7rem + 0.1vh, 12px);
+  margin-top: clamp(5px, 0.5vh, 10px);
+  color: #757575;
+}
+.photographer-container .photographer-thumb_tags {
+  margin-top: clamp(5px, 0.7vh, 15px);
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+/*# sourceMappingURL=style.css.map */

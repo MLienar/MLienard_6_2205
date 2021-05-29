@@ -1,0 +1,16 @@
+// Common
+@import "./vendors/reset";
+@import "./utils/variables";
+@import "./base/fonts";
+@import "./base/common";
+
+// Components
+@import "./components/tags";
+
+// Layouts
+@import "./layouts/header";
+
+// Pages
+@import "./pages/home/body";
+@import "./pages/home/photographers-list";
+@import "./pages/home/photographer";

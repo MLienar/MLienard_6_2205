@@ -1,0 +1,18 @@
+.tag {
+  font-weight: 600;
+  color: $color-primary;
+  cursor: pointer;
+  border: 0.5px solid #c4c4c4;
+  width: fit-content;
+  padding: clamp(5px, 0.5vh, 8px) clamp(5px, 0.8vw, 15px);
+  border-radius: 50px;
+  font-size: clamp(12px, 0.7rem + 0.1vh, 14px);
+  margin: clamp(3px, 0.2vw, 6px);
+  &:hover,
+  &:focus {
+    background: $color-primary;
+    color: white;
+    transition: all 0.2s ease-out;
+    border: 0.5px solid rgba(0 0 0 / 0);
+  }
+}
