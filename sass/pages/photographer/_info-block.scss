@@ -1,0 +1,49 @@
+.info-block {
+  background: $gray-light;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: space-between;
+  padding: 5vh;
+  box-sizing: border-box;
+  align-items: center;
+  &_first-line {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+  &_name {
+    color: $color-secondary;
+    font-size: clamp(40px, 2rem + 1vh, 55px);
+  }
+  &_contact {
+    background: $color-primary;
+    color: white;
+    padding: 20px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 5vw;
+  }
+  &_city {
+    color: $color-primary;
+    font-size: clamp(15px, 1rem + 0.5vh, 22px);
+  }
+  &_quote {
+    color: $gray-dark;
+    font-size: clamp(10px, 0.8rem + 0.2vh, 15px);
+    margin: 2vh 0;
+  }
+  &_tags {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+  &_portrait {
+    margin: auto;
+    object-fit: cover;
+    border-radius: 50%;
+    height: clamp(150px, 17vh, 250px);
+    width: clamp(150px, 17vh, 250px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  }
+}

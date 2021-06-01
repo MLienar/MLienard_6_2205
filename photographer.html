@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fisheye - Plateforme de photographes</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <header>
+        <a href="/" aria-label="link to home">
+            <img src="src/images/logo.svg" alt="logo Fisheye">
+        </a>
+    </header>
+    <main>
+        <section class="info-block">
+            <div class="info-block_left-col">
+                <div class="info-block_first-line">
+                    <h1 class="info-block_name">Mimi Keel</h1>
+                    <a class="info-block_contact" href="#">Contactez-moi</a>
+                </div>
+                <h2 class="info-block_city">London, UK</h2>
+                <p class="info-block_quote">Voir le beau dans le quotidien</p>
+                <div class="info-block_tags">
+                    <p class="tag">#portrait</p>
+                    <p class="tag">#events</p>
+                </div>
+            </div>
+            <div class="info-block_right-col">
+                <img src="src/images/photographers/MimiKeel.jpg" alt="Mimi Keel" width="500" height="500" class="info-block_portrait">
+            </div>
+        </section>
+        <section class="gallery">
+            <div class="gallery_sorter">
+                <p>Trier par</p>
+                <button class="sorter" id="sorter-display">Popularité<img src="src/images/svg/Vector.svg"></button>
+            </div>
+        </section>
+    </main>
+    <script src="js/photographer.js"></script>
+</body>
+</html>

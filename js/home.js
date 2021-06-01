@@ -1,4 +1,5 @@
 const photographersList = document.querySelector('.photographers-list')
+const tags = document.querySelectorAll('.tag')
 
 function getJson() {
     return fetch("src/json/data.json")
@@ -31,7 +32,7 @@ async function createProfiles() {
         // Create photographer link
         const photographerLink = document.createElement('a')
         photographerLink.classList.add("photographer-thumb_link")
-        photographerLink.href = `/photographer?${photographer.name}`
+        photographerLink.href = `/photographer.html?name=${photographer.name.replace(/\s+/g, '').toLowerCase()}`
 
         // Add profile pic
         const photographerPicture = document.createElement('img')
@@ -74,6 +75,7 @@ async function createProfiles() {
         for (const tag of photographer.tags) {
             const photographerTag = document.createElement("p")
             photographerTag.classList.add("tag")
+            photographerTag.addEventListener("click", toggleTag)
             photographerTag.innerText = `#${tag}`
             photographerTagList.appendChild(photographerTag)
         }
@@ -85,5 +87,42 @@ async function createProfiles() {
     }
 }    
 
+// Filter based on tags
+let activeTags = []
+
+function toggleTag(e) {
+    const clickedTag = e.target.innerText.substring(1).toLowerCase()
+    if (activeTags.includes(clickedTag)) {
+        activeTags.pop(clickedTag)
+        e.target.classList.remove("active")
+    } else {
+        activeTags.push(clickedTag)
+        e.target.classList.add("active")
+    }
+    tagFilter()
+}
+
+function tagFilter() {
+    const photographerThumbs = document.querySelectorAll('.photographer-thumb')
+    for (const thumb of photographerThumbs) {
+        if (!activeTags.length) {
+            thumb.parentNode.style.display = "flex"
+        } else {
+            let thumbIsDisplayed = false
+            for (const tag of thumb.children[4].children) {
+                if (activeTags.includes(tag.innerText.substring(1).toLowerCase())) {
+                    thumbIsDisplayed = true
+                }
+            }
+            if (thumbIsDisplayed) {
+                thumb.parentNode.style.display = "flex"
+            } else {
+                thumb.parentNode.style.display = "none"
+            }
+        }
+    }
+}
+
+tags.forEach((tag) => tag.addEventListener('click', toggleTag))
 
 createProfiles()

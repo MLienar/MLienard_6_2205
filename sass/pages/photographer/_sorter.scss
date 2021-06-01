@@ -1,0 +1,41 @@
+.gallery_sorter {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 3vh 0;
+  align-items: center;
+  p {
+    font-weight: 700;
+    margin-right: 30px;
+  }
+  .sorter {
+    background: $color-primary;
+    color: white;
+    padding: 2vh 15px;
+    border-radius: 5px;
+    position: relative;
+    border: none;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    font-size: clamp(15px, 0.7rem + 0.5vh, 20px);
+    cursor: pointer;
+    &:hover {
+      background: $color-secondary;
+      color: black;
+      transition: all 0.2s ease-in-out;
+      img {
+        filter: brightness(0);
+        transition: all 0.2s ease-in-out;
+      }
+    }
+    img {
+      margin-left: clamp(12px, 1.4vw, 25px);
+    }
+    &_picker {
+      background: $color-primary;
+      background: $color-primary;
+      color: white;
+      padding: 2vh 15px;
+      border-radius: 5px;
+    }
+  }
+}
