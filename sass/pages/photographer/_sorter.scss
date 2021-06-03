@@ -7,35 +7,63 @@
     font-weight: 700;
     margin-right: 30px;
   }
-  .sorter {
-    background: $color-primary;
-    color: white;
-    padding: 2vh 15px;
-    border-radius: 5px;
+  .sorter-wrapper {
     position: relative;
-    border: none;
-    font-family: "DM Sans", sans-serif;
-    font-weight: 700;
-    font-size: clamp(15px, 0.7rem + 0.5vh, 20px);
-    cursor: pointer;
-    &:hover {
-      background: $color-secondary;
-      color: black;
-      transition: all 0.2s ease-in-out;
+    .sorter-elem {
+      background: $color-primary;
+      color: white;
+      position: relative;
+      border: none;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 700;
+      font-size: clamp(15px, 0.7rem + 0.5vh, 20px);
+      cursor: pointer;
+      padding: 2vh 15px;
+      width: 100%;
+      border-radius: 5px;
       img {
-        filter: brightness(0);
-        transition: all 0.2s ease-in-out;
+        margin-left: clamp(12px, 1.4vw, 25px);
+        z-index: 9;
       }
     }
-    img {
-      margin-left: clamp(12px, 1.4vw, 25px);
-    }
-    &_picker {
+    &_list {
       background: $color-primary;
       background: $color-primary;
       color: white;
-      padding: 2vh 15px;
       border-radius: 5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: none;
+      font-weight: 700;
+      padding: 0.3vh 15px 0 15px;
+      box-sizing: border-box;
+      font-size: clamp(15px, 0.7rem + 0.5vh, 20px);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      img {
+        margin-left: clamp(12px, 1.4vw, 25px);
+        transform: rotate(360deg);
+      }
     }
+    &_option {
+      z-index: 3;
+      padding: 2vh 0px;
+      box-sizing: border-box;
+      border-bottom: 1px solid $gray-light;
+      cursor: pointer;
+      &:nth-child(3) {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.sorter-wrapper:hover .sorter-wrapper_list {
+  display: flex;
+  flex-flow: column nowrap;
+  li img {
+    transform: rotate(180deg);
+    transition: all 0.5s ease-in-out 0.5s;
   }
 }

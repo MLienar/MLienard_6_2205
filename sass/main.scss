@@ -6,6 +6,7 @@
 
 // Components
 @import "./components/tags";
+@import "./components/button";
 
 // Layouts
 @import "./layouts/header";
@@ -17,3 +18,4 @@
 
 @import "./pages/photographer/info-block";
 @import "./pages/photographer/sorter";
+@import "./pages/photographer/gallery-container";
