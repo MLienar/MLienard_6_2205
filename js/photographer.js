@@ -4,6 +4,11 @@ const photographerQuote = document.getElementById("photographer-quote")
 const photographerTags = document.getElementById("photographer-tags")
 const photographerPhoto = document.getElementById("photographer-photo")
 const photographerGallery = document.querySelector(".gallery_container")
+const sorterOption = document.querySelectorAll(".sorter-wrapper_option")
+const statsLikes = document.querySelector('.stats_likes')
+const statsPrice = document.querySelector('.stats_price')
+let pictureArray = []
+let sorter = "date"
 
 function getJson() {
     return fetch("src/json/data.json")
@@ -39,150 +44,129 @@ async function injectProfileInfo(){
             photographerQuote.innerText = photographer.tagline
             photographerPhoto.src = `src/images/photographers/${photographer.name.replace(/\s+/g, '')}.jpg`
             photographerPhoto.alt = photographer.name
+            statsPrice.innerText = `${photographer.price} € / jour`
+            let tabIndex = 6
             for (const tag of photographer.tags) {
                     const photographerTag = document.createElement("p")
                     photographerTag.classList.add("tag")
                     // photographerTag.addEventListener("click", toggleTag)
                     photographerTag.innerText = `#${tag}`
+                    photographerTag.setAttribute('tabindex', tabIndex) 
+                    tabIndex ++
                     photographerTags.appendChild(photographerTag)
                 }
             }
         }
     }
 
-function buildGallery(array, name) {
-    // remove last name from src 
-    const firstName = name.lastIndexOf(" ")
-    name = name.substring(0, firstName)
-    const sourceFolder = `src/images/${name}`
-    for (const media of array) {
+function GalleryBlock(media, name) {
+    const firstName = name.lastIndexOf(' ')
+    this.name = name.substring(0, firstName)
+    this.mediaInfo = {} 
+    this.htmlElems = []
+
+    const mediaLikes = function(likes) {
+        return {
+            elemToCreate: 'p',
+            classList: "counter",
+            content: `${likes} ♥`,
+        }
+    }
+
+    const mediaTitle = function(title) {
+        return {
+            elemToCreate: 'p',
+            classList: "title",
+            content: title
+        }
+    }
+    
+    this.updateMediaInfo = function(media) {
+        if (media.image) {
+            this.mediaInfo.type = "img"
+            this.mediaInfo.src = `src/images/${this.name}/${media.image}`
+        } else {
+            this.mediaInfo.type = "video"
+            this.mediaInfo.src = `src/images/${this.name}/${media.video}`
+        }
+    }
+    
+    this.createMediaBlock = function() {
+        const mediaBlock = document.createElement(this.mediaInfo.type)
+        mediaBlock.src = this.mediaInfo.src
+        return mediaBlock
+    }
+    
+    this.buildBlock = function(media) {
         const galleryThumbnail = document.createElement("div")
         galleryThumbnail.classList.add("gallery_thumbnail")
-        let elemToCreate = ""
-        let src = ""
-        // Choose if video or image block
-        if (media.image) {
-            elemToCreate = "img"
-            src = `${sourceFolder}/${media.image}`
-        } else {
-            elemToCreate = "video"
-            src = `${sourceFolder}/${media.video}`
-        }
-
-        const mediaBlock = document.createElement(`${elemToCreate}`)
-        mediaBlock.src = src
-
+    
+        this.updateMediaInfo(media)
+        const mediaBlock = this.createMediaBlock()
+        galleryThumbnail.appendChild(mediaBlock)
         
-
+        const title = new mediaTitle(media.title)
+        const likes = new mediaLikes(media.likes)
+        this.htmlElems.push(title, likes)
         const textContainer = document.createElement("div")
         textContainer.classList.add("gallery_thumbnail--text-container")
 
-        const mediaTitle = document.createElement("p")
-        mediaTitle.classList.add("gallery_thumnail--photo-title")
-        mediaTitle.innerText = media.title
-        textContainer.appendChild(mediaTitle)
+        for (const elem of this.htmlElems) {
+            const htmlBlock = document.createElement(elem.elemToCreate)
+            htmlBlock.classList.add(`gallery_thumbnail--${elem.classList}`)
+            htmlBlock.innerText = elem.content
+            textContainer.appendChild(htmlBlock)
+        }     
 
-        const mediaLikes = document.createElement("p")
-        mediaLikes.classList.add("gallery_thumbnail--counter")
-        mediaLikes.innerText = `${media.likes} ♥`
-        textContainer.appendChild(mediaLikes)
-
-
-        galleryThumbnail.appendChild(mediaBlock)
         galleryThumbnail.appendChild(textContainer)
         photographerGallery.appendChild(galleryThumbnail)
     }
 }
 
-async function filterArray() {
+function buildGallery(array, name) {
+    let totalLikes = 0
+    for (const media of array) {
+        const block = new  GalleryBlock(media, name)
+        block.buildBlock(media)
+
+        totalLikes += media.likes
+    }
+    statsLikes.innerText = `${totalLikes} ♥`
+}
+
+function sorterUpdate() {
+
+}
+
+function sortArray(array) {
+    function compare(a, b) {
+        if(a[sorter] > b[sorter]) {
+            return -1
+        } if (a[sorter] < b[sorter]) {
+            return 1
+        }
+        return 0
+    }
+    array.sort(compare)
+    console.log(array);
+}
+
+sorterOption.forEach(sorter => addEventListener('click', sorterUpdate()))
+
+async function createPhotoArray() {
     const json = await getJson() 
     for (const photographer of json.photographers) {
         if (photographer.name.replace(/\s+/g, '').toLowerCase() === currentPhotographer) {
             const photographerId = photographer.id
-            const pictureArray = json.media.filter(obj => obj.photographerId == photographerId)
-            console.log(pictureArray);
+            pictureArray = json.media.filter(obj => obj.photographerId == photographerId)
+            // console.log(pictureArray);
+            const sortedArray = sortArray(pictureArray)
             buildGallery(pictureArray, photographer.name)
         }
     }
 }
 
-
-
 injectProfileInfo()
-filterArray()
+createPhotoArray()
 
-
-
-
-// FACTORY EXAMPLE
-// function Factory() {
-//     this.createEmployee = function (type) {
-//         var employee;
- 
-//         if (type === "fulltime") {
-//             employee = new FullTime();
-//             console.log(employee);
-//         } else if (type === "parttime") {
-//             employee = new PartTime();
-//             console.log(employee);
-//         } else if (type === "temporary") {
-//             employee = new Temporary();
-//             console.log(employee);
-//         } else if (type === "contractor") {
-//             employee = new Contractor();
-//             console.log(employee);
-//         }
- 
-//         employee.type = type;
- 
-//         employee.say = function () {
-//             log.add(this.type + ": rate " + this.hourly + "/hour");
-//         }
- 
-//         return employee;
-//     }
-// }
- 
-// var FullTime = function () {
-//     this.hourly = "$12";
-// };
- 
-// var PartTime = function () {
-//     this.hourly = "$11";
-// };
- 
-// var Temporary = function () {
-//     this.hourly = "$10";
-// };
- 
-// var Contractor = function () {
-//     this.hourly = "$15";
-// };
- 
-// // log helper
-// var log = (function () {
-//     var log = "";
- 
-//     return {
-//         add: function (msg) { log += msg + "\n"; },
-//         show: function () { alert(log); log = ""; }
-//     }
-// })();
- 
-// function run() {
-//     var employees = [];
-//     var factory = new Factory();
- 
-//     employees.push(factory.createEmployee("fulltime"));
-//     employees.push(factory.createEmployee("parttime"));
-//     employees.push(factory.createEmployee("temporary"));
-//     employees.push(factory.createEmployee("contractor"));
-    
-//     for (var i = 0, len = employees.length; i < len; i++) {
-//         employees[i].say();
-//     }
-//     log.show();
-// }
-
-// run()
 

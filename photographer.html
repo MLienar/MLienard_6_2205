@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <a href="/" aria-label="link to home">
+        <a href="/" aria-label="link to home"  tabindex="1">
             <img src="src/images/logo.svg" alt="logo Fisheye">
         </a>
     </header>
@@ -17,16 +17,16 @@
         <section class="info-block">
             <div class="info-block_left-col">
                 <div class="info-block_first-line">
-                    <h1 class="info-block_name" id="photographer-name"></h1>
-                    <a class="info-block_contact button" href="#">Contactez-moi</a>
+                    <h1 class="info-block_name" id="photographer-name" tabindex="2"></h1>
+                    <a class="info-block_contact button" href="#" tabindex="3">Contactez-moi</a>
                 </div>
-                <h2 class="info-block_city" id="photographer-city"></h2>
-                <p class="info-block_quote" id="photographer-quote"></p>
+                <h2 class="info-block_city" id="photographer-city" tabindex="4"></h2>
+                <p class="info-block_quote" id="photographer-quote" tabindex="5"></p>
                 <div class="info-block_tags" id="photographer-tags">
                 </div>
             </div>
             <div class="info-block_right-col">
-                <img width="500" height="500" class="info-block_portrait" id="photographer-photo">
+                <img width="500" height="500" class="info-block_portrait" tabindex="10" id="photographer-photo">
             </div>
         </section>
         <section class="gallery">
@@ -34,16 +34,21 @@
                 <p>Trier par</p>
                 <div class="sorter-wrapper">
                     <button class="sorter-elem" id="sorter-button" aria-labelledby="sorter-elem_list sorter-button" aria-haspopup="listbox">Popularité<img src="src/images/svg/Vector.svg"></button>
-                    <ul tabindex="1" role="listbox" class ="sorter-wrapper_list" id="sorter-elem_list">
-                        <li class="sorter-wrapper_option" role="option">Popularité<img src="src/images/svg/Vector.svg"></li>
-                        <li class="sorter-wrapper_option" role="option">Date</li>
-                        <li class="sorter-wrapper_option" role="option">Titre</li>
+                    <ul tabindex="11" role="listbox" class ="sorter-wrapper_list" id="sorter-elem_list">
+                        <li class="sorter-wrapper_option" role="option" value="likes">Popularité<img src="src/images/svg/Vector.svg"></li>
+                        <li class="sorter-wrapper_option" role="option" value="date">Date</li>
+                        <li class="sorter-wrapper_option" role="option" value="title">Titre</li>
                     </ul>
                 </div>
             </div>
             <div class="gallery_container">          
+
             </div>
         </section>
+        <aside class="stats">
+            <p class="stats_likes"></p>
+            <p class="stats_price"></p>
+        </aside>
     </main>
     <script src="js/photographer.js"></script>
 </body>

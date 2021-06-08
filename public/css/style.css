@@ -463,4 +463,24 @@ header .nav-menu {
   }
 }
 
+.stats {
+  position: fixed;
+  bottom: 0;
+  right: 5vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 2vh 2vw;
+  background: #db8876;
+  border-radius: 5px 5px 0 0;
+}
+.stats_price {
+  margin-left: 5vh;
+}
+@media screen and (max-width: 750px) {
+  .stats {
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
