@@ -119,11 +119,15 @@ function GalleryBlock(media, name) {
         }     
 
         galleryThumbnail.appendChild(textContainer)
+        galleryThumbnail.addEventListener("click", lightBoxOpen)
         photographerGallery.appendChild(galleryThumbnail)
     }
 }
 
 function buildGallery(array, name) {
+    while (photographerGallery.firstChild) {
+        photographerGallery.removeChild(photographerGallery.lastChild)
+    }
     let totalLikes = 0
     for (const media of array) {
         const block = new  GalleryBlock(media, name)
@@ -134,9 +138,25 @@ function buildGallery(array, name) {
     statsLikes.innerText = `${totalLikes} ♥`
 }
 
-function sorterUpdate() {
-
+function sorterUpdate(e) {
+    const clickedFilter = e.target.textContent
+    switch(clickedFilter) {
+        case 'Popularité' :
+            sorter = 'likes'
+        break
+        case 'Date' :
+            sorter = 'date'
+        break
+        case 'Titre' :
+            sorter = 'title'
+        break
+    }
+    console.log('yo');
+    createPhotoArray()
 }
+
+sorterOption.forEach(sorter => addEventListener('click', sorterUpdate))
+
 
 function sortArray(array) {
     function compare(a, b) {
@@ -148,18 +168,19 @@ function sortArray(array) {
         return 0
     }
     array.sort(compare)
-    console.log(array);
+    if (sorter === 'title') {
+        array.reverse()
+    }
+    return array
 }
 
-sorterOption.forEach(sorter => addEventListener('click', sorterUpdate()))
 
-async function createPhotoArray() {
+async function createPhotoArray(filter) {
     const json = await getJson() 
     for (const photographer of json.photographers) {
         if (photographer.name.replace(/\s+/g, '').toLowerCase() === currentPhotographer) {
             const photographerId = photographer.id
             pictureArray = json.media.filter(obj => obj.photographerId == photographerId)
-            // console.log(pictureArray);
             const sortedArray = sortArray(pictureArray)
             buildGallery(pictureArray, photographer.name)
         }
