@@ -46,10 +46,10 @@ async function injectProfileInfo(){
             photographerPhoto.alt = photographer.name
             statsPrice.innerText = `${photographer.price} € / jour`
             let tabIndex = 6
+            // Create tags for photographer
             for (const tag of photographer.tags) {
                     const photographerTag = document.createElement("p")
                     photographerTag.classList.add("tag")
-                    // photographerTag.addEventListener("click", toggleTag)
                     photographerTag.innerText = `#${tag}`
                     photographerTag.setAttribute('tabindex', tabIndex) 
                     tabIndex ++
@@ -59,6 +59,7 @@ async function injectProfileInfo(){
         }
     }
 
+    // Individual block factory
 function GalleryBlock(media, name) {
     const firstName = name.lastIndexOf(' ')
     this.name = name.substring(0, firstName)
@@ -155,8 +156,11 @@ function sorterUpdate(e) {
     createPhotoArray()
 }
 
-sorterOption.forEach(sorter => addEventListener('click', sorterUpdate))
-
+function filterEvents() {
+    for (const option of sorterOption) {
+        option.addEventListener('click', sorterUpdate)
+    }
+}
 
 function sortArray(array) {
     function compare(a, b) {
@@ -189,5 +193,5 @@ async function createPhotoArray(filter) {
 
 injectProfileInfo()
 createPhotoArray()
-
+filterEvents()
 
