@@ -6,6 +6,9 @@ body {
 body {
   width: clamp(400px, 90vw, 1250px);
   margin: auto;
+  @media screen and (max-width: 399px) {
+    width: 95vw;
+  }
 }
 
 .reader-only {

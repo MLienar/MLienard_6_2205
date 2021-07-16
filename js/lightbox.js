@@ -7,32 +7,53 @@ function lightBoxOpen(e) {
     if (!lightBoxIsOpen) {
     lightBoxIsOpen = true
     lightboxBackground.style.display = "flex"
-    const currentMedia = currentMediaSelector(e.path)
-    currentMedia.classList.add('lightbox')
-    
+
+    const currentMedia = currentMediaSelector(e.path)  
+
     const rightArrow = createNavArrows("right")
     const leftArrow = createNavArrows("left")
+
+    const closeBtn = document.createElement("div")
+    closeBtn.classList.add('close')
+    closeBtn.addEventListener('click', lightBoxClose)
+    const crossOffsetTop = crossPosition(currentMedia)
+    closeBtn.style.top = crossOffsetTop
     
+    lightboxBackground.appendChild(closeBtn)
     lightboxBackground.appendChild(leftArrow)
     lightboxBackground.appendChild(currentMedia)
     lightboxBackground.appendChild(rightArrow)
     }
 }
 
+function crossPosition(media) {
+    const position = media.getBoundingClientRect()
+    console.log( position )
+}   
+
 
 function currentMediaSelector(array) {
     for (let i = 0 ; i < array.length ; i ++) {
         if (array[i].classList.contains('gallery_thumbnail')) {
             const media = array[i].cloneNode(true)
+            const mediaSrc = media.firstChild.src
             gallery = [...document.querySelectorAll('.gallery_thumbnail')]
-            mediaIndex = gallery.indexOf(media)
+            for (let i = 0; i < gallery.length ; i ++) {
+                if (gallery[i].firstChild.src === mediaSrc) {
+                    mediaIndex = i 
+                }
+            }
+            media.classList.add('lightbox')
             return media
         }
     }
 }
 
 function updateLightBox() {
-    
+    const currentLightBoxEl = document.querySelector('.lightbox') 
+    const newLightBoxEl = gallery[mediaIndex].cloneNode(true)
+    newLightBoxEl.classList.add("lightbox")
+    lightboxBackground.replaceChild(newLightBoxEl, currentLightBoxEl)
 }
 
 function scrollLightBoxMedia(side) {
@@ -44,6 +65,12 @@ function scrollLightBoxMedia(side) {
         case 'right':
         mediaIndex += 1;
         break;
+    }
+    if (mediaIndex > gallery.length - 1) {
+        mediaIndex = 0
+    }
+    if (mediaIndex < 0) {
+        mediaIndex = gallery.length - 1
     }
     updateLightBox()
 }

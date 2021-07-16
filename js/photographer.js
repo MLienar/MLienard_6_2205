@@ -9,6 +9,7 @@ const statsLikes = document.querySelector('.stats_likes')
 const statsPrice = document.querySelector('.stats_price')
 let pictureArray = []
 let sorter = "date"
+let tabIndex = 7
 
 function getJson() {
     return fetch("src/json/data.json")
@@ -45,7 +46,6 @@ async function injectProfileInfo(){
             photographerPhoto.src = `src/images/photographers/${photographer.name.replace(/\s+/g, '')}.jpg`
             photographerPhoto.alt = photographer.name
             statsPrice.innerText = `${photographer.price} € / jour`
-            let tabIndex = 6
             // Create tags for photographer
             for (const tag of photographer.tags) {
                     const photographerTag = document.createElement("p")
@@ -54,10 +54,12 @@ async function injectProfileInfo(){
                     photographerTag.setAttribute('tabindex', tabIndex) 
                     tabIndex ++
                     photographerTags.appendChild(photographerTag)
-                }
             }
         }
     }
+    tabIndex = 15
+}
+
 
     // Individual block factory
 function GalleryBlock(media, name) {
@@ -70,6 +72,7 @@ function GalleryBlock(media, name) {
         return {
             elemToCreate: 'p',
             classList: "counter",
+            tabIndex: tabIndex + 2,
             content: `${likes} ♥`,
         }
     }
@@ -78,6 +81,7 @@ function GalleryBlock(media, name) {
         return {
             elemToCreate: 'p',
             classList: "title",
+            tabIndex: tabIndex + 1,
             content: title
         }
     }
@@ -95,6 +99,7 @@ function GalleryBlock(media, name) {
     this.createMediaBlock = function() {
         const mediaBlock = document.createElement(this.mediaInfo.type)
         mediaBlock.src = this.mediaInfo.src
+        mediaBlock.tabIndex = tabIndex
         return mediaBlock
     }
     
@@ -116,12 +121,18 @@ function GalleryBlock(media, name) {
             const htmlBlock = document.createElement(elem.elemToCreate)
             htmlBlock.classList.add(`gallery_thumbnail--${elem.classList}`)
             htmlBlock.innerText = elem.content
+            htmlBlock.tabIndex = elem.tabIndex
             textContainer.appendChild(htmlBlock)
         }     
-
         galleryThumbnail.appendChild(textContainer)
         galleryThumbnail.addEventListener("click", lightBoxOpen)
+        galleryThumbnail.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                lightBoxOpen(e)
+            }
+        })
         photographerGallery.appendChild(galleryThumbnail)
+        tabIndex += 3
     }
 }
 
@@ -152,7 +163,6 @@ function sorterUpdate(e) {
             sorter = 'title'
         break
     }
-    console.log('yo');
     createPhotoArray()
 }
 
