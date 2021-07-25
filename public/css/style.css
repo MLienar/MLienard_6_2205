@@ -347,6 +347,14 @@ header .nav-menu {
     flex-flow: row wrap;
   }
 }
+.info-block_media-count {
+  margin-bottom: 2vh;
+  color: #525252;
+}
+.info-block_media-count span {
+  color: #d3573c;
+  font-weight: 600;
+}
 .info-block_portrait {
   margin: auto;
   object-fit: cover;
@@ -461,6 +469,9 @@ header .nav-menu {
   align-items: center;
   padding: 1vh 0;
   color: #901c1c;
+}
+.gallery_container .gallery_thumbnail--counter {
+  cursor: pointer;
 }
 @media screen and (max-width: 750px) {
   .gallery_container {

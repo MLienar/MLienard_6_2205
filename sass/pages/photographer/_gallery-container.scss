@@ -19,6 +19,9 @@
       padding: 1vh 0;
       color: $color-primary;
     }
+    &--counter {
+      cursor: pointer;
+    }
   }
   @media screen and (max-width: 750px) {
     grid-template-columns: 1fr 1fr;

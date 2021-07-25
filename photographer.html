@@ -58,6 +58,7 @@
           </div>
           <h2 class="info-block_city" id="photographer-city" tabindex="4"></h2>
           <p class="info-block_quote" id="photographer-quote" tabindex="5"></p>
+          <p class="info-block_media-count" tabindex="6"><span id="media-counter"></span> photos</p>
           <div class="info-block_tags" id="photographer-tags"></div>
         </div>
         <div class="info-block_right-col">
@@ -65,7 +66,7 @@
             width="500"
             height="500"
             class="info-block_portrait"
-            tabindex="6"
+            tabindex="7"
             id="photographer-photo"
           />
         </div>
@@ -73,12 +74,13 @@
       <section class="gallery">
         <div class="gallery_sorter">
           <p>Trier par</p>
-          <div class="sorter-wrapper" tabindex="12">
+          <div class="sorter-wrapper">
             <button
               class="sorter-elem"
               id="sorter-button"
               aria-labelledby="sorter-elem_list sorter-button"
               aria-haspopup="listbox"
+              tabindex="12"
             >
               Popularité<img src="src/images/svg/Vector.svg" />
             </button>

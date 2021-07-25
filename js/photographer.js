@@ -7,9 +7,10 @@ const photographerGallery = document.querySelector(".gallery_container")
 const sorterOption = document.querySelectorAll(".sorter-wrapper_option")
 const statsLikes = document.querySelector('.stats_likes')
 const statsPrice = document.querySelector('.stats_price')
+const mediaCount = document.getElementById('media-counter')
 let pictureArray = []
 let sorter = "date"
-let tabIndex = 7
+let tabIndex = 8
 let totalLikes = 0
 
 
@@ -59,7 +60,7 @@ async function injectProfileInfo(){
             }
         }
     }
-    tabIndex = 15
+    tabIndex = 16               
 }
 
 
@@ -142,6 +143,25 @@ function updateLikeCounter() {
     statsLikes.innerText = `${totalLikes} ♥`
 }
 
+function toggleLike(e) {
+    e.preventDefault()
+    const currentLikes = parseInt(e.target.innerText.substring(0, e.target.innerText.length - 2))
+    let currentTotalLikes = parseInt(statsLikes.innerText.substring(0, e.target.innerText.length - 2))
+
+    let newLikes = 0
+    if (!e.target.attributes.isLiked) {
+        e.target.attributes.isLiked = true
+        newLikes = currentLikes + 1
+        currentTotalLikes += 1
+    } else {
+        e.target.attributes.isLiked = false
+        newLikes = currentLikes - 1
+        currentTotalLikes -= 1
+    }
+    e.target.innerText = `${newLikes} ♥`
+    statsLikes.innerText = `${currentTotalLikes} ♥`
+}
+
 function buildGallery(array, name) {
     while (photographerGallery.firstChild) {
         photographerGallery.removeChild(photographerGallery.lastChild)
@@ -149,10 +169,14 @@ function buildGallery(array, name) {
     for (const media of array) {
         const block = new  GalleryBlock(media, name)
         block.buildBlock(media)
-
         totalLikes += media.likes
     }
-    tabIndex = 15
+    tabIndex = 16
+    mediaCount.innerText = array.length
+    const likeButtons = document.querySelectorAll(".gallery_thumbnail--counter")
+    likeButtons.forEach(button => {
+        button.addEventListener("click", toggleLike)
+    })
     updateLikeCounter()
 }
 
@@ -189,29 +213,66 @@ function sortArray(array) {
 }
 
 // Sorter accessiblity
-const sorterWrapper = document.querySelector('.sorter-wrapper')
+const sorterWrapper = document.querySelector('.sorter-elem')
 
-function closeDropdown(e) {
-    if (e.key === "Tab") {
+function closeDropdown() {
     sorterOption[0].parentElement.classList.remove("focus")
-    }
+    sorterOption[0].removeEventListener("keydown", (e) => {
+        if(e.shiftKey && e.keyCode == 9) {
+            closeDropdown(e)
+            e.target.blur()
+            const tags = document.querySelectorAll('.tag')
+            const lastTag = tags[tags.length - 1]
+            lastTag.focus()
+        }
+    })
+    sorterOption[2].removeEventListener("keydown", (e) => {
+        if (e.key === "Tab" || e.keyCode === 27) {
+            closeDropdown(e)
+            e.target.blur()
+        }
+    })
 }
 
 function filterArrayWithKeyboard(e) {
-    if (e.key === "Enter" || e.keyCode == 32) {
+    switch (e.keyCode) {
+    // Enter or spacebar
+    case 13:
+    case 32:
+        if (e.target.classList.contains("sorter-wrapper_option")) {
         e.preventDefault()
         sorterUpdate(e)
-    }
+        }
+    break;
+    // Escape
+    case 27 :
+        closeDropdown(e)
+    break;
+    } 
 }
 
 function accessibleDropdown() {
     sorterOption[0].parentElement.classList.add('focus')
     sorterOption[0].focus()
+    sorterOption[0].addEventListener("keydown", (e) => {
+        if(e.shiftKey && e.keyCode == 9) {
+            closeDropdown(e)
+            e.target.blur()
+            const tags = document.querySelectorAll('.tag')
+            const lastTag = tags[tags.length - 1]
+            lastTag.focus()
+        }
+    })
     sorterOption.forEach(option => {
         option.addEventListener("keydown", filterArrayWithKeyboard)
-
     })
-    sorterOption[2].addEventListener("keydown", closeDropdown)
+    sorterOption[2].addEventListener("keydown", (e) => {
+        if (e.key === "Tab" || e.keyCode === 27) {
+            closeDropdown(e)
+            e.target.blur()
+        }
+    })
+    document.addEventListener('keydown', filterArrayWithKeyboard)
 } 
 
 

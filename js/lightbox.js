@@ -4,7 +4,8 @@ let lightBoxIsOpen = false
 let mediaIndex = 0;
 
 function lightBoxOpen(e) {
-    if (!lightBoxIsOpen) {
+    // Don't open if like button was clicked
+    if (!lightBoxIsOpen && !e.target.classList.contains("gallery_thumbnail--counter") ) {
     lightBoxIsOpen = true
     lightboxBackground.style.display = "flex"
         // Select media to show
