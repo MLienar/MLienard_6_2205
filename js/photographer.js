@@ -53,8 +53,13 @@ async function injectProfileInfo(){
             for (const tag of photographer.tags) {
                     const photographerTag = document.createElement("p")
                     photographerTag.classList.add("tag")
+                    const tagLabel = document.createElement("span")
+                    tagLabel.setAttribute('aria-label',  "tag")
+                    tagLabel.textContent = tag
+                    tagLabel.classList.add("reader-only")
+                    photographerTag         .setAttribute('tabindex',  tabIndex)
                     photographerTag.innerText = `#${tag}`
-                    photographerTag.setAttribute('tabindex', tabIndex) 
+                    photographerTag.appendChild(tagLabel)
                     tabIndex ++
                     photographerTags.appendChild(photographerTag)
             }
@@ -77,6 +82,7 @@ function GalleryBlock(media, name) {
             classList: "counter",
             tabIndex: tabIndex + 2,
             content: `${likes} ♥`,
+            ariaLabel: 'likes'
         }
     }
 
@@ -125,6 +131,9 @@ function GalleryBlock(media, name) {
             htmlBlock.classList.add(`gallery_thumbnail--${elem.classList}`)
             htmlBlock.innerText = elem.content
             htmlBlock.tabIndex = elem.tabIndex
+            if (elem.ariaLabel) {
+                htmlBlock.setAttribute("aria-label", elem.ariaLabel)
+            }
             textContainer.appendChild(htmlBlock)
         }     
         galleryThumbnail.appendChild(textContainer)
@@ -191,9 +200,11 @@ function buildGallery(array, name) {
 // Sorter
 
 function sorterUpdate(e) {
+    if(e.target.classList.contains("sorter-wrapper_option")) {
     const clickedFilter = e.target.attributes.value.value
     sorter = clickedFilter
     createPhotoArray()
+    } 
 }
 
 function filterEvents() {

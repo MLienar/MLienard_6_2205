@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <a href="/" aria-label="link to home" tabindex="1">
+      <a href="/" aria-label="Fisheye Home Page" tabindex="1">
         <img src="src/images/logo.svg" alt="logo Fisheye" />
       </a>
     </header>
@@ -52,13 +52,13 @@
               id="photographer-name"
               tabindex="2"
             ></h1>
-            <a class="info-block_contact button" href="#" tabindex="3"
+            <a class="info-block_contact button" href="#" tabindex="3" aria-label="contact me"
               >Contactez-moi</a
             >
           </div>
-          <h2 class="info-block_city" id="photographer-city" tabindex="4"></h2>
-          <p class="info-block_quote" id="photographer-quote" tabindex="5"></p>
-          <p class="info-block_media-count" tabindex="6"><span id="media-counter"></span> photos</p>
+          <div aria-label="city"><h2 class="info-block_city" id="photographer-city" tabindex="4"></h2></div>
+          <div aria-label="quote"><p class="info-block_quote" id="photographer-quote" tabindex="5"></p></div>
+          <div aria-label="number of photos"><p class="info-block_media-count" tabindex="6"><span id="media-counter"></span> photos</p></div>
           <div class="info-block_tags" id="photographer-tags"></div>
         </div>
         <div class="info-block_right-col">
@@ -105,7 +105,7 @@
       </section>
       <aside class="stats">
         <p class="stats_likes" tabindex="99"></p>
-        <p class="stats_price" tabindex="100"></p>
+        <p class="stats_price" tabindex="100              "></p>
       </aside>
     </main>
     <script src="js/photographer.js"></script>

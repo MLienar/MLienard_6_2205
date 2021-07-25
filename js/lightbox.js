@@ -29,7 +29,6 @@ function lightBoxOpen(e) {
 
 function crossPosition(media) {
     const position = media.getBoundingClientRect()
-    console.log( position )
 }   
 
 
