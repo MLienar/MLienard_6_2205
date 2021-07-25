@@ -156,23 +156,13 @@ function buildGallery(array, name) {
     updateLikeCounter()
 }
 
+// Sorter
 
 function sorterUpdate(e) {
     totalLikes = 0;
     const clickedFilter = e.target.attributes.value.value
 
     sorter = clickedFilter
-    // switch(clickedFilter) {
-    //     case 'Popularité' :
-    //         sorter = 'likes'
-    //     break
-    //     case 'Date' :
-    //         sorter = 'date'
-    //     break
-    //     case 'Titre' :
-    //         sorter = 'title'
-    //     break
-    // }
     createPhotoArray()
 }
 
@@ -197,6 +187,35 @@ function sortArray(array) {
     }
     return array
 }
+
+// Sorter accessiblity
+const sorterWrapper = document.querySelector('.sorter-wrapper')
+
+function closeDropdown(e) {
+    if (e.key === "Tab") {
+    sorterOption[0].parentElement.classList.remove("focus")
+    }
+}
+
+function filterArrayWithKeyboard(e) {
+    if (e.key === "Enter" || e.keyCode == 32) {
+        e.preventDefault()
+        sorterUpdate(e)
+    }
+}
+
+function accessibleDropdown() {
+    sorterOption[0].parentElement.classList.add('focus')
+    sorterOption[0].focus()
+    sorterOption.forEach(option => {
+        option.addEventListener("keydown", filterArrayWithKeyboard)
+
+    })
+    sorterOption[2].addEventListener("keydown", closeDropdown)
+} 
+
+
+sorterWrapper.addEventListener("focus", accessibleDropdown)
 
 
 async function createPhotoArray(filter) {

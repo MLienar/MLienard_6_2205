@@ -73,7 +73,7 @@
       <section class="gallery">
         <div class="gallery_sorter">
           <p>Trier par</p>
-          <div class="sorter-wrapper">
+          <div class="sorter-wrapper" tabindex="12">
             <button
               class="sorter-elem"
               id="sorter-button"
@@ -83,18 +83,17 @@
               Popularité<img src="src/images/svg/Vector.svg" />
             </button>
             <ul
-              tabindex="12"
               role="listbox"
               class="sorter-wrapper_list"
               id="sorter-elem_list"
             >
-              <li class="sorter-wrapper_option" role="option" value="likes">
+              <li class="sorter-wrapper_option" role="option" value="likes" tabindex="13">
                 Popularité<img src="src/images/svg/Vector.svg" />
               </li>
-              <li class="sorter-wrapper_option" role="option" value="date">
+              <li class="sorter-wrapper_option" role="option" value="date" tabindex="14">
                 Date
               </li>
-              <li class="sorter-wrapper_option" role="option" value="title">
+              <li class="sorter-wrapper_option" role="option" value="title" tabindex="15">
                 Titre
               </li>
             </ul>
