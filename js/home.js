@@ -32,7 +32,7 @@ async function createProfiles() {
         // Create photographer link
         const photographerLink = document.createElement('a')
         photographerLink.classList.add("photographer-thumb_link")
-        photographerLink.href = `/photographer.html?name=${photographer.name.replace(/\s+/g, '').toLowerCase()}`
+        photographerLink.href = `photographer.html?name=${photographer.name.replace(/\s+/g, '').toLowerCase()}`
 
         // Add profile pic
         const photographerPicture = document.createElement('img')
