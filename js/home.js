@@ -1,5 +1,6 @@
 const photographersList = document.querySelector('.photographers-list')
 const tags = document.querySelectorAll('.tag')
+let tabIndex = 9
 
 function getJson() {
     return fetch("src/json/data.json")
@@ -32,8 +33,10 @@ async function createProfiles() {
         // Create photographer link
         const photographerLink = document.createElement('a')
         photographerLink.classList.add("photographer-thumb_link")
+        photographerLink.setAttribute('aria-label', photographer.name)
         photographerLink.href = `photographer.html?name=${photographer.name.replace(/\s+/g, '').toLowerCase()}`
-
+        photographerLink.setAttribute("tabindex", tabIndex)
+        tabIndex += 1
         // Add profile pic
         const photographerPicture = document.createElement('img')
         photographerPicture.classList.add("photographer-thumb_portrait")
@@ -53,6 +56,9 @@ async function createProfiles() {
 
         // Add City
         const photographerCity = document.createElement("p")
+        photographerCity.setAttribute("tabindex", tabIndex)
+        tabIndex += 1
+        photographerCity.setAttribute("aria-label", "city")
         photographerCity.classList.add("photographer-thumb_city")
         photographerCity.innerText = photographer.city
         photographerThumbnail.appendChild(photographerCity)
@@ -60,12 +66,18 @@ async function createProfiles() {
         // Add Quote
         const photographerQuote = document.createElement("p")
         photographerQuote.classList.add("photographer-thumb_quote")
+        photographerQuote.setAttribute("tabindex", tabIndex)
+        tabIndex += 1
+        photographerQuote.setAttribute("aria-label", "quote")
         photographerQuote.innerText = photographer.tagline
         photographerThumbnail.appendChild(photographerQuote)
 
         // Add Price
         const photographerPrice = document.createElement("p")
         photographerPrice.classList.add("photographer-thumb_price")
+        photographerPrice.setAttribute("tabindex", tabIndex)
+        tabIndex += 1
+        photographerPrice.setAttribute("aria-label", "price")
         photographerPrice.innerText = `${photographer.price}€/jour`
         photographerThumbnail.appendChild(photographerPrice)
 
@@ -76,7 +88,19 @@ async function createProfiles() {
             const photographerTag = document.createElement("p")
             photographerTag.classList.add("tag")
             photographerTag.addEventListener("click", toggleTag)
+            photographerTag.addEventListener('keydown', (e) => {
+                if (e.keyCode === 32 || e.keyCode === 13) {
+                    toggleTag(e)
+                }
+            })
             photographerTag.innerText = `#${tag}`
+            photographerTag.setAttribute("tabindex", tabIndex)
+            tabIndex += 1
+            const tagLabel = document.createElement("span")
+                    tagLabel.setAttribute('aria-label',  "tag")
+                    tagLabel.textContent = tag
+                    tagLabel.classList.add("reader-only")
+            photographerTag.appendChild(tagLabel)
             photographerTagList.appendChild(photographerTag)
         }
         photographerThumbnail.appendChild(photographerTagList)
@@ -91,9 +115,12 @@ async function createProfiles() {
 let activeTags = []
 
 function toggleTag(e) {
-    const clickedTag = e.target.innerText.substring(1).toLowerCase()
+    const clickedTag = e.target.querySelector('.reader-only').innerText
     if (activeTags.includes(clickedTag)) {
-        activeTags.pop(clickedTag)
+        const index = activeTags.indexOf(clickedTag)
+        if (index > -1) {
+            activeTags.splice(index, 1)
+        }
         e.target.classList.remove("active")
     } else {
         activeTags.push(clickedTag)
@@ -104,13 +131,14 @@ function toggleTag(e) {
 
 function tagFilter() {
     const photographerThumbs = document.querySelectorAll('.photographer-thumb')
+    console.log(activeTags);
     for (const thumb of photographerThumbs) {
         if (!activeTags.length) {
             thumb.parentNode.style.display = "flex"
         } else {
             let thumbIsDisplayed = false
             for (const tag of thumb.children[4].children) {
-                if (activeTags.includes(tag.innerText.substring(1).toLowerCase())) {
+                if (activeTags.includes(tag.querySelector('.reader-only').innerText)) {
                     thumbIsDisplayed = true
                 }
             }
@@ -124,5 +152,10 @@ function tagFilter() {
 }
 
 tags.forEach((tag) => tag.addEventListener('click', toggleTag))
+tags.forEach((tag) => tag.addEventListener('keydown', (e) => {
+    if (e.keyCode === 32 || e.keyCode === 13) {
+        toggleTag(e)
+    }
+}))
 
 createProfiles()

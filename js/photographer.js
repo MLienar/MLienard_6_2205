@@ -57,7 +57,7 @@ async function injectProfileInfo(){
                     tagLabel.setAttribute('aria-label',  "tag")
                     tagLabel.textContent = tag
                     tagLabel.classList.add("reader-only")
-                    photographerTag         .setAttribute('tabindex',  tabIndex)
+                    photographerTag.setAttribute('tabindex',  tabIndex)
                     photographerTag.innerText = `#${tag}`
                     photographerTag.appendChild(tagLabel)
                     tabIndex ++
