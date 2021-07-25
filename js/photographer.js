@@ -144,23 +144,22 @@ function updateLikeCounter() {
 }
 
 function toggleLike(e) {
-    e.preventDefault()
     const currentLikes = parseInt(e.target.innerText.substring(0, e.target.innerText.length - 2))
-    let currentTotalLikes = parseInt(statsLikes.innerText.substring(0, e.target.innerText.length - 2))
-
     let newLikes = 0
     if (!e.target.attributes.isLiked) {
         e.target.attributes.isLiked = true
         newLikes = currentLikes + 1
-        currentTotalLikes += 1
+        totalLikes += 1
     } else {
         e.target.attributes.isLiked = false
         newLikes = currentLikes - 1
-        currentTotalLikes -= 1
+        totalLikes -= 1
     }
     e.target.innerText = `${newLikes} ♥`
-    statsLikes.innerText = `${currentTotalLikes} ♥`
+    updateLikeCounter()
 }
+
+let likesAreCounted = false
 
 function buildGallery(array, name) {
     while (photographerGallery.firstChild) {
@@ -169,13 +168,22 @@ function buildGallery(array, name) {
     for (const media of array) {
         const block = new  GalleryBlock(media, name)
         block.buildBlock(media)
-        totalLikes += media.likes
+        if(!likesAreCounted) {
+            totalLikes += media.likes
+        }               
     }
+    likesAreCounted = true
     tabIndex = 16
     mediaCount.innerText = array.length
     const likeButtons = document.querySelectorAll(".gallery_thumbnail--counter")
     likeButtons.forEach(button => {
         button.addEventListener("click", toggleLike)
+        button.addEventListener("keypress", (e) => {
+            if (e.keyCode === 32 || e.keyCode === 13) {
+                e.preventDefault()
+                toggleLike(e)
+            } 
+        })
     })
     updateLikeCounter()
 }
@@ -183,9 +191,7 @@ function buildGallery(array, name) {
 // Sorter
 
 function sorterUpdate(e) {
-    totalLikes = 0;
     const clickedFilter = e.target.attributes.value.value
-
     sorter = clickedFilter
     createPhotoArray()
 }
@@ -210,7 +216,7 @@ function sortArray(array) {
         array.reverse()
     }
     return array
-}
+}            
 
 // Sorter accessiblity
 const sorterWrapper = document.querySelector('.sorter-elem')
