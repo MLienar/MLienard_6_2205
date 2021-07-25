@@ -342,6 +342,11 @@ header .nav-menu {
   flex-flow: row nowrap;
   align-items: center;
 }
+@media screen and (max-width: 550px) {
+  .info-block_tags {
+    flex-flow: row wrap;
+  }
+}
 .info-block_portrait {
   margin: auto;
   object-fit: cover;
@@ -485,6 +490,107 @@ header .nav-menu {
 @media screen and (max-width: 750px) {
   .stats {
     display: none;
+  }
+}
+
+.modal-background {
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal-form {
+  background: #db8876;
+  width: clamp(330px, 60vw, 500px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-flow: column nowrap;
+  box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 20px 30px;
+  position: relative;
+  box-sizing: border-box;
+}
+.modal-form_first-line {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-start;
+  margin-bottom: 2vh;
+}
+.modal-form_first-line .close {
+  position: relative;
+  top: unset;
+  right: unset;
+  opacity: 1;
+}
+.modal-form_first-line .close:before, .modal-form_first-line .close:after {
+  background-color: white !important;
+  opacity: 1 !important;
+}
+.modal-form_title {
+  color: black;
+  font-size: clamp(25px, 1vh + 2rem, 40px);
+  width: clamp(300px, 60%, 450px);
+  line-height: 50px;
+}
+.modal-form_label {
+  font-size: clamp(15px, 0.5rem + 1vh, 25px);
+}
+@media screen and (max-width: 550px) {
+  .modal-form_label {
+    font-size: 20px;
+  }
+}
+.modal-form_input {
+  width: 100%;
+  height: clamp(35px, 4vh, 40px);
+  border: 0px;
+  margin: 0.5vh 0 1vh 0;
+  border-radius: 2px;
+}
+@media screen and (max-width: 550px) {
+  .modal-form_input {
+    height: 5vh;
+    margin: 2vh 0;
+  }
+}
+.modal-form_textarea {
+  height: clamp(90px, 16vh, 160px);
+  margin-bottom: 2vh;
+}
+@media screen and (max-width: 550px) {
+  .modal-form_textarea {
+    height: 20vh;
+  }
+}
+.modal-form_submit {
+  margin: 0;
+  border: 0px;
+  padding: clamp(2vh) clamp(30px, 7vw, 55px);
+}
+@media screen and (max-width: 550px) {
+  .modal-form_submit {
+    align-self: center;
+    padding: 10px 40px;
+    margin-top: 5vh;
+  }
+}
+@media screen and (max-width: 550px) {
+  .modal-form {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    padding: 3vh;
   }
 }
 
