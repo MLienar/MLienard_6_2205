@@ -205,3 +205,47 @@ injectProfileInfo()
 createPhotoArray()
 filterEvents()
 
+// Modal 
+
+const contactBtn = document.querySelector(".info-block_contact")
+const modal = document.querySelector('.modal-background')
+const form = document.querySelector('.modal-form')
+const formInputs = document.querySelectorAll('.modal-form_input')
+const modalCloseBtn = document.querySelector('.close')
+
+function showModal() {
+    modal.style.display = "flex"
+    document.addEventListener("keydown", escToCloseModal)
+}
+
+function hideModal() {
+    if (modal.style.display != "none") {
+        modal.style.display = "none"
+        document.removeEventListener("keydown", escToCloseModal)
+    }
+}
+
+function escToCloseModal(e) {
+    if (e.key === "Escape") {
+        hideModal()
+    }
+}
+
+// Handle form submit
+function submitForm (event) {
+    event.preventDefault()
+    let userInputs = []
+    for(const input of formInputs) {
+        const key = input.id
+        const value = input.value
+        const obj  = {}
+        obj[key] = value
+        userInputs.push(obj)
+    }
+    console.log(userInputs);
+}
+
+
+contactBtn.addEventListener('click', showModal)
+modalCloseBtn.addEventListener('click', hideModal)
+form.addEventListener('submit', submitForm)

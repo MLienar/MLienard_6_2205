@@ -16,7 +16,7 @@
     <main>
       <div class="lightbox-background"></div>
       <div class="modal-background">
-        <form action="" class="modal-form">
+        <form class="modal-form">
           <div class="modal-form_first-line">
             <h2 class="modal-form_title">Contactez-moi <span id="photgrapher-name">Mimi Keel</span></span></h2>
             <div class="close">
@@ -29,11 +29,12 @@
             id="firstname"
             autocomplete="first-name"
             class="modal-form_input"
+            required aria-required="true"
           />
           <label class="modal-form_label" for="lastname">Nom</label>
-          <input type="text" id="lastname" class="modal-form_input" />
-          <label class="modal-form_label" for="email">Email</label>
-          <input type="email" id="email" class="modal-form_input" />
+          <input type="text" autocomplete="family-name" id="lastname" class="modal-form_input" required aria-required="true"/>
+          <label class="modal-form_label" autocomplete="mail" for="email">Email</label>
+          <input type="email" id="email" class="modal-form_input" required aria-required="true" />
           <label class="modal-form_label" for="message">Votre message</label>
           <input type="textarea" id="message" class="modal-form_input modal-form_textarea" />
           <input

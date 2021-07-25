@@ -7,9 +7,9 @@ function lightBoxOpen(e) {
     if (!lightBoxIsOpen) {
     lightBoxIsOpen = true
     lightboxBackground.style.display = "flex"
-
+        // Select media to show
     const currentMedia = currentMediaSelector(e.path)  
-
+        // Create controls
     const rightArrow = createNavArrows("right")
     const leftArrow = createNavArrows("left")
 
@@ -18,7 +18,7 @@ function lightBoxOpen(e) {
     closeBtn.addEventListener('click', lightBoxClose)
     const crossOffsetTop = crossPosition(currentMedia)
     closeBtn.style.top = crossOffsetTop
-    
+        // Append created elements to lightbox
     lightboxBackground.appendChild(closeBtn)
     lightboxBackground.appendChild(leftArrow)
     lightboxBackground.appendChild(currentMedia)
@@ -44,6 +44,10 @@ function currentMediaSelector(array) {
                 }
             }
             media.classList.add('lightbox')
+            // Add autoplay to video
+            if (media.firstChild.nodeName === "VIDEO") {
+                media.firstChild.autoplay = true
+            }
             return media
         }
     }
