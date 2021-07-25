@@ -56,6 +56,9 @@ function currentMediaSelector(array) {
 function updateLightBox() {
     const currentLightBoxEl = document.querySelector('.lightbox') 
     const newLightBoxEl = gallery[mediaIndex].cloneNode(true)
+    if (newLightBoxEl.firstChild.nodeName === "VIDEO") {
+        newLightBoxEl.firstChild.autoplay = true
+    }
     newLightBoxEl.classList.add("lightbox")
     lightboxBackground.replaceChild(newLightBoxEl, currentLightBoxEl)
 }

@@ -10,6 +10,8 @@ const statsPrice = document.querySelector('.stats_price')
 let pictureArray = []
 let sorter = "date"
 let tabIndex = 7
+let totalLikes = 0
+
 
 function getJson() {
     return fetch("src/json/data.json")
@@ -136,33 +138,41 @@ function GalleryBlock(media, name) {
     }
 }
 
+function updateLikeCounter() {
+    statsLikes.innerText = `${totalLikes} ♥`
+}
+
 function buildGallery(array, name) {
     while (photographerGallery.firstChild) {
         photographerGallery.removeChild(photographerGallery.lastChild)
     }
-    let totalLikes = 0
     for (const media of array) {
         const block = new  GalleryBlock(media, name)
         block.buildBlock(media)
 
         totalLikes += media.likes
     }
-    statsLikes.innerText = `${totalLikes} ♥`
+    tabIndex = 15
+    updateLikeCounter()
 }
 
+
 function sorterUpdate(e) {
-    const clickedFilter = e.target.textContent
-    switch(clickedFilter) {
-        case 'Popularité' :
-            sorter = 'likes'
-        break
-        case 'Date' :
-            sorter = 'date'
-        break
-        case 'Titre' :
-            sorter = 'title'
-        break
-    }
+    totalLikes = 0;
+    const clickedFilter = e.target.attributes.value.value
+
+    sorter = clickedFilter
+    // switch(clickedFilter) {
+    //     case 'Popularité' :
+    //         sorter = 'likes'
+    //     break
+    //     case 'Date' :
+    //         sorter = 'date'
+    //     break
+    //     case 'Titre' :
+    //         sorter = 'title'
+    //     break
+    // }
     createPhotoArray()
 }
 

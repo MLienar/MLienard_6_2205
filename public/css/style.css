@@ -623,6 +623,7 @@ header .nav-menu {
 .lightbox {
   z-index: 3;
   width: 70vh;
+  max-width: 70vw;
   height: 90vh;
   max-height: 90vh;
   display: flex;
