@@ -223,24 +223,41 @@ header .nav-menu {
   display: flex;
   flex-flow: row wrap;
 }
+@media screen and (max-width: 550px) {
+  header {
+    flex-flow: column nowrap;
+  }
+  header img {
+    margin-bottom: 2vh;
+  }
+  header .nav-menu {
+    justify-content: center;
+  }
+}
 
 .index-main {
   display: flex;
   flex-flow: column wrap;
   align-items: flex-end;
 }
-
-.index-main {
-  display: flex;
-  flex-flow: column;
-  align-items: flex-end;
+@media screen and (max-width: 550px) {
+  .index-main {
+    align-items: center !important;
+  }
 }
-.index-main .photographers-list {
+
+.photographers-list {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
   width: 100%;
   margin-top: 5vh;
+}
+@media screen and (max-width: 550px) {
+  .photographers-list {
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
 }
 
 .photographer-container {

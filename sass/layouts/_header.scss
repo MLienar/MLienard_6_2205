@@ -12,4 +12,13 @@ header {
     display: flex;
     flex-flow: row wrap;
   }
+  @media screen and (max-width: 550px) {
+    flex-flow: column nowrap;
+    img {
+      margin-bottom: 2vh;
+    }
+    .nav-menu {
+      justify-content: center;
+    }
+  }
 }

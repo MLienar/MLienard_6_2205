@@ -2,4 +2,7 @@
   display: flex;
   flex-flow: column wrap;
   align-items: flex-end;
+  @media screen and (max-width: 550px) {
+    align-items: center !important;
+  }
 }
