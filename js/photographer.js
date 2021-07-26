@@ -109,6 +109,7 @@ function GalleryBlock(media, name) {
         const mediaBlock = document.createElement(this.mediaInfo.type)
         mediaBlock.src = this.mediaInfo.src
         mediaBlock.tabIndex = tabIndex
+        mediaBlock.alt = media.description
         return mediaBlock
     }
     
