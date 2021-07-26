@@ -75,7 +75,7 @@
   &_submit {
     margin: 0;
     border: 0px;
-    padding: clamp(2vh) clamp(30px, 7vw, 55px);
+    padding: 2vh clamp(30px, 7vw, 55px);
     @media screen and (max-width: 550px) {
       align-self: center;
       padding: 10px 40px;
