@@ -18,7 +18,9 @@
       <div class="modal-background">
         <form class="modal-form">
           <div class="modal-form_first-line">
-            <h2 class="modal-form_title">Contactez-moi <span id="photgrapher-name">Mimi Keel</span></span></h2>
+            <h2 class="modal-form_title">
+              Contactez-moi <span id="photgrapher-name"></span>
+            </h2>
             <div class="close">
               <div class="crossbar"></div>
             </div>
@@ -27,16 +29,34 @@
           <input
             type="text"
             id="firstname"
-            autocomplete="first-name"
+            autocomplete="given-name"
             class="modal-form_input"
-            required aria-required="true"
+            required
+            aria-required="true"
           />
           <label class="modal-form_label" for="lastname">Nom</label>
-          <input type="text" autocomplete="family-name" id="lastname" class="modal-form_input" required aria-required="true"/>
-          <label class="modal-form_label" autocomplete="mail" for="email">Email</label>
-          <input type="email" id="email" class="modal-form_input" required aria-required="true" />
+          <input
+            type="text"
+            autocomplete="family-name"
+            id="lastname"
+            class="modal-form_input"
+            required
+            aria-required="true"
+          />
+          <label class="modal-form_label" for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="modal-form_input"
+            required
+            aria-required="true"
+          />
           <label class="modal-form_label" for="message">Votre message</label>
-          <input type="textarea" id="message" class="modal-form_input modal-form_textarea" />
+          <input
+            type="text"
+            id="message"
+            class="modal-form_input modal-form_textarea"
+          />
           <input
             type="submit"
             class="button modal-form_submit"
@@ -52,13 +72,33 @@
               id="photographer-name"
               tabindex="2"
             ></h1>
-            <a class="info-block_contact button" href="#" tabindex="3" aria-label="contact me"
+            <a
+              class="info-block_contact button"
+              href="#"
+              tabindex="3"
+              aria-label="contact me"
               >Contactez-moi</a
             >
           </div>
-          <div aria-label="city"><h2 class="info-block_city" id="photographer-city" tabindex="4"></h2></div>
-          <div aria-label="quote"><p class="info-block_quote" id="photographer-quote" tabindex="5"></p></div>
-          <div aria-label="number of photos"><p class="info-block_media-count" tabindex="6"><span id="media-counter"></span> photos</p></div>
+          <div aria-label="city">
+            <h2
+              class="info-block_city"
+              id="photographer-city"
+              tabindex="4"
+            ></h2>
+          </div>
+          <div aria-label="quote">
+            <p
+              class="info-block_quote"
+              id="photographer-quote"
+              tabindex="5"
+            ></p>
+          </div>
+          <div aria-label="number of photos">
+            <p class="info-block_media-count" tabindex="6">
+              <span id="media-counter"></span> photos
+            </p>
+          </div>
           <div class="info-block_tags" id="photographer-tags"></div>
         </div>
         <div class="info-block_right-col">
@@ -82,20 +122,41 @@
               aria-haspopup="listbox"
               tabindex="12"
             >
-              Popularité<img src="src/images/svg/Vector.svg" />
+              Popularité<img
+                src="src/images/svg/Vector.svg"
+                alt="downwards arrow"
+              />
             </button>
             <ul
               role="listbox"
               class="sorter-wrapper_list"
               id="sorter-elem_list"
             >
-              <li class="sorter-wrapper_option" role="option" value="likes" tabindex="13">
-                Popularité<img src="src/images/svg/Vector.svg" />
+              <li
+                class="sorter-wrapper_option"
+                role="option"
+                id="likes"
+                tabindex="13"
+              >
+                Popularité<img
+                  src="src/images/svg/Vector.svg"
+                  alt="downwards arrow"
+                />
               </li>
-              <li class="sorter-wrapper_option" role="option" value="date" tabindex="14">
+              <li
+                class="sorter-wrapper_option"
+                role="option"
+                id="date"
+                tabindex="14"
+              >
                 Date
               </li>
-              <li class="sorter-wrapper_option" role="option" value="title" tabindex="15">
+              <li
+                class="sorter-wrapper_option"
+                role="option"
+                id="title"
+                tabindex="15"
+              >
                 Titre
               </li>
             </ul>
@@ -105,7 +166,7 @@
       </section>
       <aside class="stats">
         <p class="stats_likes" tabindex="99"></p>
-        <p class="stats_price" tabindex="100              "></p>
+        <p class="stats_price" tabindex="100"></p>
       </aside>
     </main>
     <script src="js/photographer.js"></script>

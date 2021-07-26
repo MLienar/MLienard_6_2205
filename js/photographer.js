@@ -202,7 +202,7 @@ function buildGallery(array, name) {
 
 function sorterUpdate(e) {
     if(e.target.classList.contains("sorter-wrapper_option")) {
-    const clickedFilter = e.target.attributes.value.value
+    const clickedFilter = e.target.attributes.id.value
     sorter = clickedFilter
     createPhotoArray()
     } 
