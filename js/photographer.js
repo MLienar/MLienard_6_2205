@@ -320,9 +320,11 @@ const modal = document.querySelector('.modal-background')
 const form = document.querySelector('.modal-form')
 const formInputs = document.querySelectorAll('.modal-form_input')
 const modalCloseBtn = document.querySelector('.close')
+const firstNameInput = document.getElementById('firstname')
 
 function showModal() {
     modal.style.display = "flex"
+    firstNameInput.focus()
     document.addEventListener("keydown", escToCloseModal)
 }
 
